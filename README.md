@@ -20,7 +20,7 @@ Tambien se incluye instalacion de un servidor RADIUS con DHCP, DNS y extras.
 Se requiere un sistema base Debian 12 con al menos dos interfaces de red configuradas (WAN y LAN).
 
 1. Clonar el repositorio:
-   git clone https://github.com/JP-666/Proyecto-Proxy-Squid.git
+   git clone https://github.com/JuanPCG/Proyecto-Proxy-Squid.git
 2. Acceder al directorio:
    cd Proyecto-Proxy-Squid
 3. Ejecutar el instalador (Como superusuario):
@@ -29,4 +29,4 @@ Se requiere un sistema base Debian 12 con al menos dos interfaces de red configu
 ## **Documentación y Wiki**
 
 Para obtener detalles adicionales sobre la arquitectura de red, manuales de usuario específicos y guías de resolución de problemas técnicos, consulte la wiki oficial: https://cristobal.wiki/  
-Mantenido por JP-666 y LDMG
+Mantenido por JuanPCG y LDMG
