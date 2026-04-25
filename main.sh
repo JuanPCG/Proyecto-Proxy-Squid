@@ -138,7 +138,7 @@ echo "Reseting root password to \"Z10N0101\"." >> log
 echo "# ssh 10.2.2.2 -l root" >> log
 echo "root@10.2.2.2's password:" >> log
 apt update >> log
-DEBIAN_FRONTEND=noninteractive apt install -y -qq whois iptables squid-openssl iptables-persistent isc-dhcp-server nginx php-fpm openssh-server git freeradius freeradius-mysql mariadb-common mariadb-server php-mysql mysql-common mariadb-client mariadb-server sudo jq ed >> log
+DEBIAN_FRONTEND=noninteractive apt install -y -qq whois iptables squid-openssl iptables-persistent isc-dhcp-server nginx php-fpm openssh-server git freeradius freeradius-mysql mariadb-common mariadb-server php-mysql mysql-common mariadb-client mariadb-server sudo jq ed dnsmasq >> log
 echo "Final del log, puedes volver al terminal anterior" >> log
 
 esperar "[2] IPTABLES"
@@ -340,7 +340,9 @@ do
 	mysql -u Fran -pFranPassword -D baseradius -e "INSERT INTO radcheck (username, attribute, op, value) VALUES ('$ALM', 'Crypt-Password', ':=', '$CHASH');"
 done
 
-
+cp -rvf cosas/dnsmasq.conf /etc/dnsmasq.conf
+systemctl restart dnsmasq
+esperar "[+] DNSmasq preparado"
 
 esperar "Permitiendo copias de seguridad ahora..."
 echo "[mysqld]" > /etc/mysql/mariadb.conf.d/99-permitir-copias.cnf
