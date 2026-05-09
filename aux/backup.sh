@@ -20,7 +20,7 @@ then
 	read -p "Usuario de la base de datos > " usuario
 	read -p "Contraseña > " contra
 
-	COMANDO="mysqldump -h $ip -u $usuario -p$contra --skip-ssl $base > $HOME/backups/backup_\$(date).sql"
+	COMANDO="mysqldump -h $ip -u $usuario -p$contra --skip-ssl $base > $HOME/backups/backup_\$(date +%d_%m_%y).sql"
 	(crontab -l 2>/dev/null; echo "0 0 * * * $COMANDO") | crontab -
 
 	CLAVE="$HOME/.ssh/id_ed25519"
@@ -46,12 +46,12 @@ IP_REMOTA="REEMPLAZAR_IP"
 DESTINO="$HOME/backups/$(date +%Y/%m/%d)"
 mkdir -p "$DESTINO"
 
-scp -rv root@$IP_REMOTA:/etc/squid/squid.conf "$DESTINO/"
-scp -rv root@$IP_REMOTA:/etc/squid/acl.txt "$DESTINO/"
-scp -rv root@$IP_REMOTA:/etc/dhcp/dhcpd.conf "$DESTINO/"
-scp -rv root@$IP_REMOTA:/etc/network/interfaces "$DESTINO/"
-scp -rv root@$IP_REMOTA:/etc/freeradius/3.0/clients "$DESTINO/"
-
+scp -r root@$IP_REMOTA:/etc/squid/squid.conf "$DESTINO/"
+scp -r root@$IP_REMOTA:/etc/squid/acl.txt "$DESTINO/"
+scp -r root@$IP_REMOTA:/etc/dhcp/dhcpd.conf "$DESTINO/"
+scp -r root@$IP_REMOTA:/etc/network/interfaces "$DESTINO/"
+scp -r root@$IP_REMOTA:/etc/freeradius/3.0/clients.conf "$DESTINO/"
+echo "...IPTABLES..."
 ssh root@$IP_REMOTA "iptables-save" > "$DESTINO/iptables.rules"
 EOF
 
